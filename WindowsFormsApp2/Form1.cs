@@ -19,8 +19,8 @@ namespace WindowsFormsApp2
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            ContactDetails fichita = new ContactDetails();
-            fichita.ShowDialog();
+            ContactDetails fichita1 = new ContactDetails();
+            fichita1.ShowDialog();
         }
     }
 }
