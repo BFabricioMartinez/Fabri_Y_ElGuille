@@ -12,16 +12,36 @@ namespace WindowsFormsApp2
 {
     public partial class Form1 : Form
     {
+
+        #region CONSTRUCTORS
         public Form1()
         {
             InitializeComponent();
         }
 
+        #endregion
+
+        #region EVENTS_HANDLERS
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            ContactDetails fichita1 = new ContactDetails();
-            fichita1.ShowDialog();
+            OpenContactDetailDialog();
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+        #region METHODS
+        private void OpenContactDetailDialog()
+        {
+            ContactDetails fichita = new ContactDetails();
+            fichita.ShowDialog();
+        }
+        #endregion
+
     }
 }
 
