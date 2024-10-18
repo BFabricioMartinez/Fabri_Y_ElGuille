@@ -12,9 +12,11 @@ namespace WindowsFormsApp2
 {
     public partial class ContactDetails : Form
     {
+        private BusinessLogicLayer _businessLogicLayer;
         public ContactDetails()
         {
             InitializeComponent();
+            _businessLogicLayer = new BusinessLogicLayer();
         }
 
         private void ContactDetails_Load(object sender, EventArgs e)
@@ -24,12 +26,26 @@ namespace WindowsFormsApp2
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            
+            SaveContact();
+            this.Close();
+            ((Main)this.Owner).PopulateContacts();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+
+        private void SaveContact()
+        {
+            Contact contact = new Contact();
+            contact.FirstName = txtFirstName.Text;
+            contact.LastName = txtLastName.Text;
+            contact.Phone = txtPhone.Text;
+            contact.Address = txtAddress.Text;
+
+            _businessLogicLayer.SaveContact(contact);
         }
     }
 }

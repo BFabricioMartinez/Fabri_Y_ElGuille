@@ -12,16 +12,22 @@ namespace WindowsFormsApp2
 {
     public partial class Main : Form
     {
+        private BusinessLogicLayer _businessLogicLayer;
 
         #region CONSTRUCTORS
         public Main()
         {
             InitializeComponent();
+            _businessLogicLayer = new BusinessLogicLayer();
         }
 
         #endregion
 
         #region EVENTS_HANDLERS
+        private void Main_Load(object sender, EventArgs e)
+        {
+            PopulateContacts();
+        }
         private void btnAdd_Click(object sender, EventArgs e)
         {
             OpenContactDetailDialog();
@@ -31,14 +37,17 @@ namespace WindowsFormsApp2
         {
 
         }
-
         #endregion
 
         #region METHODS
         private void OpenContactDetailDialog()
         {
             ContactDetails fichita = new ContactDetails();
-            fichita.ShowDialog();
+            fichita.ShowDialog(this);
+        }
+        public void PopulateContacts()
+        {
+            gridContacts.DataSource = _businessLogicLayer.GetAllContacts();
         }
         #endregion
 
