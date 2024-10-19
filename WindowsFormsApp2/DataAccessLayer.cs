@@ -11,6 +11,7 @@ namespace WindowsFormsApp2
     public class DataAccessLayer
     {
         private SqlConnection conn = new SqlConnection("Integrated Security=SSPI;Persist Security Info=False;User ID=sa;Initial Catalog=WinFormsContacts;Data Source=DESKTOP-L2H4HG4\\SQLEXPRESS");
+       
         public void InsertContact(Contact contact)
         {
             try
@@ -42,7 +43,6 @@ namespace WindowsFormsApp2
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally 
@@ -85,6 +85,48 @@ namespace WindowsFormsApp2
             finally { conn.Close(); }
             return contacts;
         }
+    
+       public void UpdateContact(Contact contact)
+        {
+            try
+            {
+                conn.Open();
+
+                string query = @"UPDATE Contacts  
+                                                    SET FirstName = @FirstName, 
+                                                        LastName = @LastName,
+                                                        Phone = @Phone,
+                                                        Address = @Address
+                                                    WHERE Id = @Id";
+
+                SqlParameter id = new SqlParameter("@Id", contact.Id);
+                SqlParameter firstName = new SqlParameter("@FirstName", contact.FirstName);
+                SqlParameter lastName = new SqlParameter("@LastName", contact.LastName);
+                SqlParameter phone = new SqlParameter("@Phone", contact.Phone);
+                SqlParameter address = new SqlParameter("@Address", contact.Address);
+
+                SqlCommand command = new SqlCommand(query, conn);
+                command.Parameters.Add(id);
+                command.Parameters.Add(firstName);
+                command.Parameters.Add(lastName);
+                command.Parameters.Add(phone);
+                command.Parameters.Add(address);
+
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+
     }
 
    

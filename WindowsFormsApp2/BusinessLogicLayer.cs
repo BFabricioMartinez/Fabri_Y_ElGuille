@@ -16,12 +16,13 @@ namespace WindowsFormsApp2
         { 
             _dataAccessLayer = new DataAccessLayer();
         }
+
         public Contact SaveContact(Contact contact)
         { 
            if(contact.Id == 0) 
                _dataAccessLayer.InsertContact(contact);
-           /* else
-                 // _dataAccessLayer.UpdateContact;*/
+           else
+               _dataAccessLayer.UpdateContact(contact);
            return contact;
         }
         public List<Contact> GetAllContacts() 

@@ -40,6 +40,8 @@
             this.lastNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phoneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Edit = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.Delete = new System.Windows.Forms.DataGridViewLinkColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridContacts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contactBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -53,12 +55,15 @@
             this.firstNameDataGridViewTextBoxColumn,
             this.lastNameDataGridViewTextBoxColumn,
             this.phoneDataGridViewTextBoxColumn,
-            this.addressDataGridViewTextBoxColumn});
+            this.addressDataGridViewTextBoxColumn,
+            this.Edit,
+            this.Delete});
             this.gridContacts.DataSource = this.contactBindingSource;
             this.gridContacts.Location = new System.Drawing.Point(3, 74);
             this.gridContacts.Name = "gridContacts";
             this.gridContacts.Size = new System.Drawing.Size(793, 373);
             this.gridContacts.TabIndex = 0;
+            this.gridContacts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridContacts_CellContentClick);
             // 
             // txtSearch
             // 
@@ -130,6 +135,22 @@
             this.addressDataGridViewTextBoxColumn.HeaderText = "Address";
             this.addressDataGridViewTextBoxColumn.Name = "addressDataGridViewTextBoxColumn";
             // 
+            // Edit
+            // 
+            this.Edit.HeaderText = "Edit";
+            this.Edit.Name = "Edit";
+            this.Edit.ReadOnly = true;
+            this.Edit.Text = "Edit";
+            this.Edit.UseColumnTextForLinkValue = true;
+            // 
+            // Delete
+            // 
+            this.Delete.HeaderText = "Delete";
+            this.Delete.Name = "Delete";
+            this.Delete.ReadOnly = true;
+            this.Delete.Text = "Delete";
+            this.Delete.UseColumnTextForLinkValue = true;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -157,12 +178,14 @@
         private System.Windows.Forms.Label search;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.BindingSource contactBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn phoneDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn addressDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource contactBindingSource;
+        private System.Windows.Forms.DataGridViewLinkColumn Edit;
+        private System.Windows.Forms.DataGridViewLinkColumn Delete;
     }
 }
 
