@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp2.Misc;
 
 namespace WindowsFormsApp2
 {
@@ -35,7 +36,15 @@ namespace WindowsFormsApp2
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            /*string texto = "ContraseñaSegura";
+            string hash = HashHelper.GenerateMD5Hash(texto);
 
+            MessageBox.Show($"Texto original: {texto}");
+            MessageBox.Show($"Hash MD5: {hash}");*/
+
+            
+            PopulateContacts(txtSearch.Text);
+            txtSearch.Text = null;
         }
         #endregion
 
@@ -45,9 +54,10 @@ namespace WindowsFormsApp2
             ContactDetails fichita = new ContactDetails();
             fichita.ShowDialog(this);
         }
-        public void PopulateContacts()
+
+        public void PopulateContacts(string searchTxt = null)
         {
-            gridContacts.DataSource = _businessLogicLayer.GetAllContacts();
+            gridContacts.DataSource = _businessLogicLayer.GetAllContacts(searchTxt);
         }
         #endregion
 
@@ -81,7 +91,16 @@ namespace WindowsFormsApp2
                     contactDetail.ShowDialog(this);
                     break;
                 case "Delete":
-                    MessageBox.Show("borrar contacto" + idToEdit.Value.ToString());
+                    //MessageBox.Show("borrar contacto" + idToEdit.Value.ToString());
+                    DialogResult res = MessageBox.Show("Seguro que queres eliminar el registro?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (res == DialogResult.Yes)
+                    {
+                        DeleteContact((int)idToEdit.Value);
+                        PopulateContacts();
+                    }
+                    
+                    
                     break;
                 default:
                     break;
@@ -137,6 +156,11 @@ namespace WindowsFormsApp2
              }*/
 
             #endregion
+        }
+
+        private void DeleteContact(int id)
+        { 
+            _businessLogicLayer.DeleteContact(id);
         }
     }
 }

@@ -54,6 +54,8 @@
     <Compile Include="ContactDetails.Designer.cs">
       <DependentUpon>ContactDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Misc\hashing.cs" />
+    <Compile Include="Products\BLL.cs" />
     <Compile Include="DataAccessLayer.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -61,8 +63,13 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\DAL.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Seguridad\Users\BLL_Users.cs" />
+    <Compile Include="Ventas\BLL_ventas.cs" />
+    <Compile Include="Ventas\DAL_ventas.cs" />
+    <Compile Include="Ventas\Venta.cs" />
     <EmbeddedResource Include="ContactDetails.resx">
       <DependentUpon>ContactDetails.cs</DependentUpon>
     </EmbeddedResource>
@@ -91,6 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Seguridad\Profiles\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -25,9 +25,17 @@ namespace WindowsFormsApp2
                _dataAccessLayer.UpdateContact(contact);
            return contact;
         }
-        public List<Contact> GetAllContacts() 
+
+        public List<Contact> GetAllContacts(string searchTxt = null) 
         {
-           return  _dataAccessLayer.GetContacts(); 
+            //toda la logia de negocio relacionada a este proceso
+           return  _dataAccessLayer.GetContacts(searchTxt); 
+        }
+
+        public void DeleteContact(int id)
+        {
+            //logica de negocio relacioado a esto
+            _dataAccessLayer.DeleteContact(id);
         }
     }
 }

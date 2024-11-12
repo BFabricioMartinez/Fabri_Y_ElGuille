@@ -51,15 +51,30 @@ namespace WindowsFormsApp2
             }
         }
 
-        public List<Contact> GetContacts()
+        public List<Contact> GetContacts(string searchTxt = null)
         {
             List<Contact> contacts = new List<Contact>();
+           
             try
             {
                 conn.Open();
+
                 string query = "select * from Contacts";
 
-                SqlCommand command = new SqlCommand(query, conn);
+                SqlCommand command = new SqlCommand();
+
+                if(!string.IsNullOrEmpty(searchTxt))
+                {
+                    query += @" WHERE FirstName LIKE @search 
+                                    OR LastName LIKE @search 
+                                    OR Phone    LIKE @search
+                                    OR Address  LIKE @search";
+
+                    command.Parameters.Add(new SqlParameter("@search",$"%{searchTxt}%"));
+                }
+
+                command.CommandText = query;
+                command.Connection = conn;
 
                 SqlDataReader reader = command.ExecuteReader();
 
@@ -74,6 +89,7 @@ namespace WindowsFormsApp2
                     contact.Address = reader["Address"].ToString();
 
                     contacts.Add(contact);
+
                 }
 
             }
@@ -86,7 +102,7 @@ namespace WindowsFormsApp2
             return contacts;
         }
     
-       public void UpdateContact(Contact contact)
+        public void UpdateContact(Contact contact)
         {
             try
             {
@@ -94,10 +110,10 @@ namespace WindowsFormsApp2
 
                 string query = @"UPDATE Contacts  
                                                     SET FirstName = @FirstName, 
-                                                        LastName = @LastName,
-                                                        Phone = @Phone,
-                                                        Address = @Address
-                                                    WHERE Id = @Id";
+                                                         LastName = @LastName,
+                                                            Phone = @Phone,
+                                                          Address = @Address
+                                                         WHERE Id = @Id";
 
                 SqlParameter id = new SqlParameter("@Id", contact.Id);
                 SqlParameter firstName = new SqlParameter("@FirstName", contact.FirstName);
@@ -106,6 +122,7 @@ namespace WindowsFormsApp2
                 SqlParameter address = new SqlParameter("@Address", contact.Address);
 
                 SqlCommand command = new SqlCommand(query, conn);
+
                 command.Parameters.Add(id);
                 command.Parameters.Add(firstName);
                 command.Parameters.Add(lastName);
@@ -126,6 +143,32 @@ namespace WindowsFormsApp2
             }
         }
 
+        public void DeleteContact(int id)
+        {
+
+            try
+            {
+                //conectar
+                conn.Open();
+
+                //def query sql
+                string query = "DELETE FROM Contacts WHERE Id = @Id";
+
+                //tratar parametros
+                SqlCommand command = new SqlCommand(query, conn);
+                command.Parameters.Add(new SqlParameter("@Id", id));
+
+                //ejecutar query
+                command.ExecuteNonQuery();
+               
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally { conn.Close(); }
+        }
 
     }
 
