@@ -25,7 +25,7 @@ namespace WindowsFormsApp2
 
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnSave_Click_1(object sender, EventArgs e)
         {
             SaveContact();
             this.Close();
@@ -36,7 +36,6 @@ namespace WindowsFormsApp2
         {
             this.Close();
         }
-
 
         private void SaveContact()
         {
@@ -73,7 +72,6 @@ namespace WindowsFormsApp2
             txtPhone.Text = string.Empty;
             txtAddress.Text= string.Empty;
         }
-
 
     }
 }
